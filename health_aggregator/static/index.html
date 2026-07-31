@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>System Health Aggregator — Caution/Advisory Panel</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header>
+  <div class="title-block">
+    <h1>SYSTEM HEALTH AGGREGATOR</h1>
+    <div class="subtitle">simplified caution / advisory panel — portfolio demo</div>
+  </div>
+  <div class="sim-banner" title="No real project data is present in this repo; all three sources are behavioural simulations.">
+    ⚠ ALL SOURCES SIMULATED — STAND-IN DATA
+  </div>
+  <div class="masters">
+    <button id="master-warning" class="master warn-master" aria-label="Master warning annunciator; click to acknowledge">MASTER<br>WARNING</button>
+    <button id="master-caution" class="master caut-master" aria-label="Master caution annunciator; click to acknowledge">MASTER<br>CAUTION</button>
+    <button id="btn-reset" class="ctl" title="Maintenance reset: clears latched messages whose fault is gone, resets tripped SSPCs and the ABT">RESET</button>
+  </div>
+</header>
+
+<main>
+  <section class="cas-stack panel">
+    <h2>CAS MESSAGES <span class="hint">(severity, then newest)</span></h2>
+    <ul id="cas-list" class="cas-list"></ul>
+    <div id="cas-empty" class="cas-empty">— no active messages —</div>
+  </section>
+
+  <section class="tiles">
+    <div class="panel tile" id="tile-sspc">
+      <h2>SSPC — I²t TRIP UNIT <span class="sim-tag">SIM</span></h2>
+      <table class="datatable" id="sspc-table">
+        <thead><tr><th>CH</th><th>LOAD</th><th>STATE</th><th>AMPS</th><th>I²t ACCUM</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="panel tile" id="tile-bus">
+      <h2>AUTO BUS TRANSFER <span class="sim-tag">SIM</span></h2>
+      <div id="bus-mimic" class="bus-mimic"></div>
+    </div>
+    <div class="panel tile" id="tile-harness">
+      <h2>HARNESS BIT — 12 WIRES <span class="sim-tag">SIM</span></h2>
+      <div id="wire-grid" class="wire-grid"></div>
+    </div>
+  </section>
+</main>
+
+<section class="panel controls">
+  <h2>FAULT INJECTION (demo scenarios)</h2>
+  <div class="btn-row" id="inject-buttons">
+    <button class="ctl" data-scn="sspc_overload">SSPC OVERLOAD</button>
+    <button class="ctl" data-scn="sspc_short">SSPC SHORT</button>
+    <button class="ctl" data-scn="harness_open">WIRE OPEN</button>
+    <button class="ctl" data-scn="harness_short_gnd">SHORT→GND</button>
+    <button class="ctl" data-scn="harness_short_pwr">SHORT→PWR</button>
+    <button class="ctl" data-scn="harness_intermittent">INTERMITTENT</button>
+    <button class="ctl" data-scn="harness_high_res">HIGH RES</button>
+    <button class="ctl" data-scn="bus_main_fail">MAIN BUS FAIL</button>
+    <button class="ctl" data-scn="bus_xfer_fail">XFER FAIL</button>
+    <button class="ctl" data-scn="bus_restore">BUS RESTORE</button>
+  </div>
+</section>
+
+<section class="panel history">
+  <h2>FAULT HISTORY <span class="hint">(newest first; persisted to logs/fault_history.jsonl)</span></h2>
+  <div class="scroll-x">
+    <table class="datatable" id="history-table">
+      <thead><tr><th>TIME (UTC)</th><th>EVENT</th><th>SEV</th><th>MESSAGE</th><th>SRC</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</section>
+
+<footer>
+  Original public-knowledge engineering demo. Severity convention (red warning /
+  amber caution / advisory) per FAA AC&nbsp;25.1322-1. No proprietary data.
+</footer>
+<script src="/app.js"></script>
+</body>
+</html>
