@@ -9,14 +9,13 @@ color-coded (red **warning** / amber **caution** / **advisory**), with master
 annunciators, acknowledge/reset behaviour, and a timestamped fault-history
 log.
 
-**⚠ All three sources are SIMULATED stand-ins.** This repository contained no
-existing SSPC, harness-tester, or bus-transfer project when this was built,
-so each source is a behavioural simulation of what such a module would
-realistically report (see `health_aggregator/sources/`). Every envelope,
-UI tile, CAS message, and history entry is tagged `SIM` end to end so
-simulated data can never masquerade as real data. Swapping in a real module
-means reimplementing one `step()` method against real hardware or a serial
-feed; the aggregator does not change.
+**All three sources are simulated stand-ins**, each a behavioural model of
+what such a module would realistically report (see
+`health_aggregator/sources/`). Every envelope, UI tile, CAS message, and
+history entry is tagged `SIM` end to end by design, so simulated data can
+never masquerade as real data — swapping in a real module means
+reimplementing one `step()` method against real hardware or a serial feed;
+the aggregator itself doesn't change.
 
 This is original, public-knowledge engineering only. The severity convention
 follows the publicly available FAA AC 25.1322-1 (red warning / amber caution
